@@ -6,21 +6,22 @@ Google Analytics plugin for [react-i13n](https://github.com/yahoo/react-i13n)
 
 ## Features
 * Integrate [react-i13n](https://github.com/yahoo/react-i13n) to provide instrumentation approach using [Google Analytics](http://www.google.com/analytics/).
-* [react-i13n](https://github.com/yahoo/react-i13n) handles the beaconing management and handle the click events, this plugin provides [event handlers](https://github.com/yahoo/react-i13n/blob/master/docs/guides/createPlugins.md) to handle these events and firing `ga beacons`.
+* [react-i13n](https://github.com/yahoo/react-i13n) handles the beaconing management and handles the click events, this plugin provides [event handlers](https://github.com/yahoo/react-i13n/blob/master/docs/guides/createPlugins.md) to handle these events and firing `ga beacons`.
 
 ## Install
 
 ```
-npm install react-i13n-ga
+npm install --save react-i13n-ga
 ```
 
 ## Usage
-You will need to create a instance of `react-i13n-ga` first, then use `getPlugin` to get the plugin object, then pass it into [setupI13n](https://github.com/yahoo/react-i13n/blob/master/docs/api/setupI13n.md) provided by [react-i13n](https://github.com/yahoo/react-i13n), then it will help to decorate your `Top Level Component` with i13n `react-i13n-ga` plugin functionalities.
+You will need to create an instance of `react-i13n-ga` first, then use `getPlugin` to get the plugin object, then pass it into [setupI13n](https://github.com/yahoo/react-i13n/blob/master/docs/api/setupI13n.md) provided by [react-i13n](https://github.com/yahoo/react-i13n), then it will help to decorate your `Top Level Component` with i13n `react-i13n-ga` plugin functionalities.
 
 ```js
-var reactI13nGoogleAnalytics = require('react-i13n-ga');
 var setupI13n = require('react-i13n').setupI13n;
-var reactI13nGoogleAnalytics = new ReactI13nGoogleAnalytics([your tracking id]); // create reactI13nGoogleAnalytics instance with your tracking id
+var ReactI13nGoogleAnalytics = require('react-i13n-ga');
+// create reactI13nGoogleAnalytics instance with your tracking id
+var reactI13nGoogleAnalytics = new ReactI13nGoogleAnalytics([your tracking id]);
 // Suppose that Application is your top level component, use setupI13n with this plugin
 Application = setupI13n(Application, {}, [reactI13nGoogleAnalytics.getPlugin()]);
 ```
@@ -55,7 +56,7 @@ var I13nAnchor = require('react-i13n').I13nAnchor;
 // in template, will fire event beacon as ga('send', 'event', 'foo', 'click', 'Foo');
 <I13nAnchor i13nModel={{category: 'foo', action: 'click'}}>Foo</I13nAnchor>
 ```
-You can also integrate integrate [createI13nNode](https://github.com/yahoo/react-i13n/blob/master/docs/api/createI13nNode.md#createi13nnodecomponent-options) or [I13nMixin](https://github.com/yahoo/react-i13n/blob/master/docs/api/createI13nNode.md#i13nmixin) to get your custom component be tracked
+You can also integrate [createI13nNode](https://github.com/yahoo/react-i13n/blob/master/docs/api/createI13nNode.md#createi13nnodecomponent-options) or [I13nMixin](https://github.com/yahoo/react-i13n/blob/master/docs/api/createI13nNode.md#i13nmixin) to track your custom component.
 
 ```js
 
@@ -98,7 +99,7 @@ var Foo = React.createClass({
 </Foo>
 ```
 
-For better instrumentation integration, you can leverage the [inherit architecture](https://github.com/yahoo/react-i13n/blob/master/docs/guides/integrateWithComponents.md), e.g., create a parent and define the `category` so that all the links inside will apply it.
+For better instrumentation integration, you can leverage the [inherit architecture](https://github.com/yahoo/react-i13n/blob/master/docs/guides/integrateWithComponents.md), e.g., create a parent and define the `category` as it's props, so that all the links inside will use the same category.
 
 ```js
 
